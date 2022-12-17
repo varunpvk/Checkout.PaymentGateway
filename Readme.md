@@ -13,13 +13,27 @@ The solution assumes, Merchants using Checkout API's Payment Gateway to process 
     
     - SQL Server: Checkout Merchant DB & PaymentsDB. Former works in the context of Checkout API and the latter works in the context of MockBank API
     
-    - Docker: SQL Server DBs and MockBank and Payment Gateway can be containerised and run from docker enginer.
+    - Docker: SQL Server DBs and MockBank and Payment Gateway can be containerised and run from docker engine.
 
 ## Design
 
+### HLD
+
 ![HLD](/Design/HLD.png)
+
+### LLD
+
+Design Patterns
+
+. Onion Layout for CheckoutMerchant.API
+
+. Repository pattern for CRUD operations with SQL Server DB 
+
+. Dependancy Injection
+
+. Fluent Validations
     
-## Workflow
+### Workflow
 
 Certain part of the design is inspired from [OpenBanking API Spec](https://openbankinguk.github.io/read-write-api-site3/v3.1.10/references/usage-examples/domestic-payments-usage-examples.html#sequence-diagram)
 
@@ -71,7 +85,7 @@ sequenceDiagram
 
 - CheckoutMerchantDB: Merchant Details (works in the context of Checkout API)
 
-- PaymentsDB: Payment Details 
+- PaymentsDB: Payment Details (works in the context of MockBank API)
 
 ## TestSetup
 
