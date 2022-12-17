@@ -1,0 +1,90 @@
+syntax = "proto3";
+
+option csharp_namespace = "MockBankClient";
+
+package greet;
+
+service MockBank {
+  rpc InitiatePayment (InitiatePaymentRequest) returns (PaymentInitationResponse);
+  rpc ProcessPayment (PaymentRequest) returns (PaymentResponse);
+  rpc GetPayment (PaymentIdRequest) returns (PaymentResponse);
+}
+
+service MockBankAuth
+{
+	rpc GenerateAccessToken (ClientCredentials) returns (AccessToken);
+}
+
+message PaymentIdRequest {
+	string paymentId = 1;
+}
+
+message InitiatePaymentRequest {
+	string paymentId = 1;
+	Initiation initiation = 2;
+	CreditorAccount creditorAccount = 3;
+}
+
+message PaymentInitationResponse {
+	string paymentId = 1;
+	string consentId = 2;
+	string status = 3;
+	string creationDateTime = 4;
+	string statusUpdateDateTime = 5;
+	Initiation initiation = 6;
+	CreditorAccount creditorAccount = 7;
+	Link redirectLink = 8;
+}
+
+message PaymentRequest {
+	string paymentId = 1;
+	string consentId = 2;
+	Initiation initiation = 3;
+	CreditorAccount creditorAccount = 4;
+}
+
+message PaymentResponse {
+	string PaymentId = 1;
+	string consentId = 2;
+	string status = 3;
+	string createdDateTime = 4;
+	string statusUpdateDateTime = 5;
+	Initiation initiation = 6;
+	CreditorAccount creditorAccount = 7;
+	Link PaymentStatusLink = 8;
+}
+
+message Initiation {
+	string instructionIdentifier = 1;
+	InstructedAmount instructedAmount = 2;
+}
+
+message InstructedAmount {
+	double Amount = 1;
+	string Currency = 2;
+}
+
+message CreditorAccount {
+	string cardNumber = 1;
+	string expiryDate = 2;
+	int32 cvv = 3;
+}
+
+message Link {
+	string Url = 1;
+}
+
+message ClientCredentials{
+	string clientId = 1;
+	string clientSecret = 2;
+	string grantType = 3;
+	string scope = 4;
+}
+
+message AccessToken{
+	string token = 1;
+	string tokenType = 2;
+	string scope = 3;
+	string status = 4;
+	int64 expiresIn = 5;
+}

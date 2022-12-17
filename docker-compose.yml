@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  checkoutmerchant.api:
+    container_name: CheckoutMerchant.API
+    image: ${DOCKER_REGISTRY-}checkoutmerchantapi
+    build:
+      context: .
+      dockerfile: CheckoutMerchantAPI/Dockerfile
+
+  mockbank.api:
+    container_name: MockBank.API
+    image: ${DOCKER_REGISTRY-}mockbankapi
+    build:
+      context: .
+      dockerfile: MockBank.API/Dockerfile
+
+  sql-server-db:
+    container_name: SQLServer
+    image: mcr.microsoft.com/mssql/server
+    ports:
+        - "1433:1433"
+    environment:
+        SA_PASSWORD: "password_123"
+        ACCEPT_EULA: "Y"
