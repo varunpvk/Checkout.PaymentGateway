@@ -13,13 +13,27 @@ The solution assumes, Merchants using Checkout API's Payment Gateway to process 
     
     - SQL Server: Checkout Merchant DB & PaymentsDB. Former works in the context of Checkout API and the latter works in the context of MockBank API
     
-    - Docker: SQL Server DBs and MockBank and Payment Gateway can be containerised and run from docker enginer.
+    - Docker: SQL Server DBs and MockBank and Payment Gateway can be containerised and run from docker engine.
 
 ## Design
 
-[link](https://1drv.ms/u/s!Ag7NKIWnRA_ugYwaTbRTM87OX9XfaA?e=iWhEc2)
+### HLD
+
+![HLD](/Design/HLD.png)
+
+### LLD
+
+Design Patterns
+
+. Onion Layout for CheckoutMerchant.API
+
+. Repository pattern for CRUD operations with SQL Server DB 
+
+. Dependancy Injection
+
+. Fluent Validations
     
-## Workflow
+### Workflow
 
 Certain part of the design is inspired from [OpenBanking API Spec](https://openbankinguk.github.io/read-write-api-site3/v3.1.10/references/usage-examples/domestic-payments-usage-examples.html#sequence-diagram)
 
@@ -71,7 +85,7 @@ sequenceDiagram
 
 - CheckoutMerchantDB: Merchant Details (works in the context of Checkout API)
 
-- PaymentsDB: Payment Details 
+- PaymentsDB: Payment Details (works in the context of MockBank API)
 
 ## TestSetup
 
@@ -106,17 +120,17 @@ Components used
 
 5. [Download BloomRPC](https://github.com/bloomrpc/bloomrpc/releases) and run the tool for running MockBank API as a client
 
-    [BloomRPC](https://1drv.ms/u/s!Ag7NKIWnRA_ugYwcAshhwwwNQ-QlSQ?e=2meELe)
-    
+    ![BloomRPC](/Design/BloomRPC.jpg)
+
     5.1. Import the proto file from the solution folder 
             
         path: /MockBank.API/Protos/greet.proto
 
-    [Proto file](https://1drv.ms/u/s!Ag7NKIWnRA_ugYwdenZQH6tormvC8A?e=uf91RN)
+    ![Proto file](/Design/Import%20Proto.jpg)
     
     5.2. Once the proto contracts loaded, in the Env field, enter the following address:    `localhost:61672`
 
-    [Service Address](https://1drv.ms/u/s!Ag7NKIWnRA_ugYwek36Vyk9wur7gXA?e=fnHiDT)
+    ![Service Address](/Design/ServiceLocator.jpg)
 
     5.3. Test GenerateAccessToken grpc call to verify if the service is reachable
 
@@ -125,7 +139,7 @@ Components used
 
 ## Design Improvements
 
-[Design Improvements](https://1drv.ms/u/s!Ag7NKIWnRA_ugYwbqMx8xsbXsNFIxg?e=QQw72k)
+![Design Improvements](/Design/Improvements.jpg)
 
 ## Code Quality Improvements
 
