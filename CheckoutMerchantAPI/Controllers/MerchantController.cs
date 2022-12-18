@@ -25,9 +25,14 @@ namespace CheckoutMerchant.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<string>> CreateMerchantAsync(MerchantDetails merchantDetails)
+        public async Task<string> CreateMerchantAsync(MerchantDetails merchantDetails)
         {
             ValidationResult result = await _validator.ValidateAsync(merchantDetails);
+
+            if (!result.IsValid)
+            {
+                throw new ArgumentException($"Validation Error: {result.Errors.First().ErrorMessage}");
+            }
 
             try
             {
@@ -41,14 +46,14 @@ namespace CheckoutMerchant.API.Controllers
                     });
 
                 if (isMerchantCreated)
-                    return Ok(accessToken.Token);
+                    return accessToken.Token;
             }
             catch
             {
-                return BadRequest();
+                throw;
             }
 
-            return Unauthorized();
+            throw new InvalidOperationException("Failed to create Merchant");
         }
     }
 }

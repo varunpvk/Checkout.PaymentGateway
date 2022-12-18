@@ -6,14 +6,10 @@ namespace MockBankAPI.Services
 {
     public class MockBankService : MockBank.MockBankBase
     {
-        private readonly ILogger<MockBankService> _logger;
         private readonly IPaymentsRepository _paymentsRepository;
 
-        public MockBankService(
-            ILogger<MockBankService> logger,
-            IPaymentsRepository paymentsRepository)
+        public MockBankService(IPaymentsRepository paymentsRepository)
         {
-            _logger = logger;
             _paymentsRepository = paymentsRepository;
         }
         

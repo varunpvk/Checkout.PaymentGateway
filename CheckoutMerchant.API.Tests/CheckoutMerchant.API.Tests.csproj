@@ -9,7 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoFixture" Version="4.17.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
+    <PackageReference Include="Moq" Version="4.18.3" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -22,7 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ValidatorTests\" />
+    <ProjectReference Include="..\CheckoutMerchant.Infrastructure\CheckoutMerchant.Infrastructure.csproj" />
+    <ProjectReference Include="..\CheckoutMerchantAPI\CheckoutMerchant.API.csproj" />
+    <ProjectReference Include="..\MockBank.API\MockBank.API.csproj" />
   </ItemGroup>
 
 </Project>

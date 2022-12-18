@@ -87,6 +87,11 @@ namespace CheckoutMerchantAPI.Controllers
         {
             ValidationResult result = await _merchantPaymentDetailsValidator.ValidateAsync(merchantPaymentDetails);
 
+            if (!result.IsValid)
+            {
+                throw new ArgumentException($"Validation Error: {result.Errors.First().ErrorMessage}");
+            }
+
             var tokenInfo = await _merchantService.GetAccessTokenAsync(merchantPaymentDetails.InstructionIdentifier);
 
             var paymentResponse = await _mockBank.GetPaymentDetailsAsync(new PaymentIdRequest
