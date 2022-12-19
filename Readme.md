@@ -135,7 +135,13 @@ Components used
     5.3. Test GenerateAccessToken grpc call to verify if the service is reachable
 
     
-> Note: The idea is to inject SQLPackage.exe after docker-compose up is run so as to create the required Database and tables in the docker container of SQLServer. However, with the limited timeframe, I refrained from using it.  
+> Note: The idea is to inject SQLPackage.exe after docker-compose up is run so as to create the required Database and tables in the docker container of SQLServer. However, with the limited timeframe, I refrained from using it. 
+
+> How to run video: 
+
+- [VisualStudio](/Design/video1975308753.mp4)
+
+- [console](/Design/video1831597338.mp4)
 
 ## Design Improvements
 
